@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="AudioPlayer (Draft)">
+    <output-path>$PROJECT_DIR$/out/artifacts/AudioPlayer__Draft_</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.example.pudgeplayer.Application" />
+        <option name="description" value="Simple JavaFX Audio Player" />
+        <option name="height" value="380" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="Audio Player" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+        <option name="width" value="1196" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="PudgePlayer.jar">
+        <element id="module-output" name="PudgePlayer" />
+      </element>
+    </root>
+  </artifact>
+</component>
