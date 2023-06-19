@@ -51,5 +51,6 @@
             <Button fx:id="shuffleButton" mnemonicParsing="false" onAction="#shuffleMedia" prefHeight="63.0" prefWidth="88.0" text="Shuffle" />
          </buttons>
       </ButtonBar>
+      <Button fx:id="saveButton" layoutX="760.0" layoutY="305.0" mnemonicParsing="false" onAction="#savePlaylist" prefHeight="25.0" prefWidth="142.0" text="Save Playlist" />
    </children>
 </AnchorPane>

@@ -20,8 +20,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
@@ -57,9 +56,12 @@ public class Controller implements Initializable {
     private boolean timerRunning;
     private boolean running;
 
+    private String path;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        updateDirectory("music");
+        getPath();
+        updateDirectory();
 
         try {
             updateTitle();
@@ -76,7 +78,16 @@ public class Controller implements Initializable {
         });
     }
 
-    public void updateDirectory(String path) {
+    public void getPath() {
+        try(BufferedReader br = new BufferedReader(new FileReader("savedDir.txt"))) {
+            path = br.readLine();
+        } catch (IOException e) {
+            path = "music";
+//            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateDirectory() {
         songs = new ArrayList<File>();
 
         File directory = new File(path);
@@ -92,6 +103,7 @@ public class Controller implements Initializable {
         libraryList.getItems().clear();
         for (File song : songs) {
             libraryList.getItems().add(song.getName());
+//            System.out.println(song.getName());
         }
 //        libraryList.getItems().addAll(songs);
 
@@ -216,9 +228,9 @@ public class Controller implements Initializable {
 
         File file = dirChooser.showDialog(stage);
 
-        if (file != null) {
-            updateDirectory(file.getAbsolutePath());
-        }
+        path = file.getAbsolutePath();
+
+        updateDirectory();
     }
 
     public void skipForward() {
@@ -245,5 +257,15 @@ public class Controller implements Initializable {
         libraryList.getItems().clear();
         libraryList.getItems().addAll(songs);
         changeSong();
+    }
+
+    public void savePlaylist() {
+        try {
+            FileWriter myWriter = new FileWriter("savedDir.txt");
+            myWriter.write(path);
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
